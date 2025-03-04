@@ -2,6 +2,7 @@
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QApplication, QShortcut, QMainWindow, QVBoxLayout, QLabel, QPushButton
 from PyQt5.QtGui import QKeySequence, QFont
 from PyQt5.QtCore import Qt, pyqtSignal, QObject
+from PyQt5 import QtWidgets, QtCore, QtGui
 import threading, sys
 
 class CommandListener(QObject):
@@ -258,6 +259,10 @@ def newGlobalScore(value):
 
 global curentQuestionValue
 currentQuestionValue = 500
+
+QtWidgets.QApplication.setAttribute(QtCore.Qt.ApplicationAttribute.AA_EnableHighDpiScaling)
+QtWidgets.QApplication.setAttribute(QtCore.Qt.ApplicationAttribute.AA_UseHighDpiPixmaps)
+
 
 teamCount = 4
 names = []
