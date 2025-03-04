@@ -54,8 +54,8 @@ class CustomScoring():
     def add(self, amount): # this might be reworked
         self.score += amount + (self.placement - 1) * 50 # add the amount and the placement bonus
         
-    def subtract(self, _):
-        self.score -= 100 # This is fixed to 100
+    def subtract(self, amount):
+        self.score -= amount # This is fixed to 100
     
     def getScore(self):
         return self.score
@@ -213,7 +213,7 @@ class JeopardyUI(QMainWindow):
         pBuffer = 0
         sortedBoxes[0].setPlacement(placement)
         s += "====================\n"
-        s += f"{sortedBoxes[0].name} is in {sortedBoxes[0].getPlacement()} place\n"
+        s += f"{sortedBoxes[0].name} is in {sortedBoxes[0].getPlacement()} place with {sortedBoxes[0].getScore()} points\n"
         counter = 1
 
 
@@ -227,7 +227,7 @@ class JeopardyUI(QMainWindow):
                 pBuffer = 0
 
                 sortedBoxes[counter].setPlacement(placement)
-            s += f"{sortedBoxes[counter].name} is in {sortedBoxes[counter].getPlacement()} place\n"
+            s += f"{sortedBoxes[counter].name} is in {sortedBoxes[counter].getPlacement()} place with {sortedBoxes[counter].getScore()} points\n"
             counter += 1
 
         print(s)
