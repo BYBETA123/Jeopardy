@@ -154,7 +154,7 @@ class JeopardyUI(QMainWindow):
 
         self.setCentralWidget(self.widget)
         #setup shortcut
-        self.escape_shortcut = QShortcut(QKeySequence(Qt.Key_Escape), self)
+        self.escape_shortcut = QShortcut(QKeySequence(Qt.Key_Q), self)
         self.escape_shortcut.activated.connect(self.close_application)
         self.initUI()
         self.mouse_press_pos = None
@@ -226,9 +226,9 @@ class JeopardyUI(QMainWindow):
             else:
                 placement = placement + pBuffer + 1
                 pBuffer = 0
-
                 sortedBoxes[counter].setPlacement(placement)
             s += f"{sortedBoxes[counter].name} is in {sortedBoxes[counter].getPlacement()} place with {sortedBoxes[counter].getScore()} points\n"
+            cScore = sortedBoxes[counter].getScore() # update the current score
             counter += 1
 
         print(s)
