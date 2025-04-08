@@ -161,6 +161,22 @@ class JeopardyUI(QMainWindow):
 
     def initUI(self):
 
+        def makeMultiplierVBox():
+            vBox = QVBoxLayout()
+            vBox.setAlignment(Qt.AlignCenter)
+            vBox.setSpacing(5)
+            # th vbox needs to be made of 5 buttons
+            # 100, 200, 300, 400, 500
+            buttons = [100, 200, 300, 400, 500]
+            for button in buttons:
+                b = QPushButton(str(button))
+                b.setStyleSheet(f"background-color: #FFFFFF; font-size: 11; font-weight: bold; color: #2A3698")
+                b.setFixedSize(100, 20)
+                b.setContentsMargins(0, 0, 0, 0) # remove padding
+                b.clicked.connect(lambda _, value=button: newGlobalScore(value))
+                vBox.addWidget(b)
+            return vBox
+
         print("InitUI")
         self.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint)  # Removes title bar and border
         self.setAttribute(Qt.WA_TranslucentBackground)  # Make the window transparent
@@ -185,6 +201,9 @@ class JeopardyUI(QMainWindow):
 
         for i in range(len(self.players)):
             layout.addWidget(self.boxes[self.players[i]].getBox(), stretch = 1)
+
+        # add another widget to it
+        layout.addLayout(makeMultiplierVBox())
 
     def updateSorted(self, box, value):
         f = open("log.txt", "a")
@@ -219,6 +238,7 @@ class JeopardyUI(QMainWindow):
 
 
         for _ in range(1, len(sortedBoxes)): # we can skip the first element
+            print(cScore, sortedBoxes[counter].getScore())
             if cScore == sortedBoxes[counter].getScore():
                 # This is a tie
                 sortedBoxes[counter].setPlacement(placement)
@@ -251,6 +271,7 @@ class JeopardyUI(QMainWindow):
         
 def newGlobalScore(value):
     global currentQuestionValue
+    print("New Global Score:", value)
     currentQuestionValue = value
 
 
